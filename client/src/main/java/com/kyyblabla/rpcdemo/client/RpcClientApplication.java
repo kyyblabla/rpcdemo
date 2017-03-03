@@ -1,6 +1,7 @@
 package com.kyyblabla.rpcdemo.client;
 
-import com.kyyblabla.rpcframework.rpc.RpcProxy;
+import com.kyyblabla.rpcframework.rpc.client.RpcClient;
+import com.kyyblabla.rpcframework.rpc.client.RpcProxy;
 import com.kyyblabla.rpcdemo.services.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -18,12 +19,11 @@ public class RpcClientApplication implements CommandLineRunner {
     }
 
     @Autowired
-    private RpcProxy rpcProxy;
+    private RpcClient rpcClient;
 
     public void run(String... strings) throws Exception {
-        HelloService helloService = rpcProxy.create(HelloService.class);
+        HelloService helloService = rpcClient.create(HelloService.class);
         String kyy = helloService.sayHello("kyy");
         System.out.println(kyy);
-
     }
 }

@@ -1,7 +1,8 @@
 package com.kyyblabla.rpcdemo.client.config;
 
-import com.kyyblabla.rpcframework.rpc.RpcProxy;
-import com.kyyblabla.rpcframework.rpc.ServiceDiscovery;
+import com.kyyblabla.rpcframework.rpc.client.RpcClient;
+import com.kyyblabla.rpcframework.rpc.client.RpcProxy;
+import com.kyyblabla.rpcframework.rpc.registry.ServiceDiscovery;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,6 +20,11 @@ public class BeanConfig {
     @Bean
     public RpcProxy rpcProxy(ServiceDiscovery serviceDiscovery) {
         return new RpcProxy(serviceDiscovery);
+    }
+
+    @Bean
+    public RpcClient RpcClient(ServiceDiscovery serviceDiscovery) {
+        return new RpcClient(serviceDiscovery);
     }
 
 }

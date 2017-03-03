@@ -1,7 +1,7 @@
 package com.kyyblabla.rpcdemo.server.config;
 
-import com.kyyblabla.rpcframework.rpc.RpcServer;
-import com.kyyblabla.rpcframework.rpc.ServiceRegistry;
+import com.kyyblabla.rpcframework.rpc.server.RpcServer;
+import com.kyyblabla.rpcframework.rpc.registry.ServiceRegistry;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

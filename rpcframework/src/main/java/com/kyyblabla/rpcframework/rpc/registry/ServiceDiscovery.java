@@ -1,5 +1,6 @@
-package com.kyyblabla.rpcframework.rpc;
+package com.kyyblabla.rpcframework.rpc.registry;
 
+import com.kyyblabla.rpcframework.config.Constant;
 import io.netty.util.internal.ThreadLocalRandom;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
@@ -25,11 +26,6 @@ public class ServiceDiscovery {
 
     private String registryAddress;
 
-
-    public static class Constant {
-        public static int ZK_SESSION_TIMEOUT = 5000;
-        public static String ZK_REGISTRY_PATH = "/registry";
-    }
 
     public ServiceDiscovery(String registryAddress) {
         this.registryAddress = registryAddress;

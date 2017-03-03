@@ -1,10 +1,12 @@
-package com.kyyblabla.rpcframework.rpc;
+package com.kyyblabla.rpcframework.rpc.server;
 
 import com.kyyblabla.rpcframework.dto.RpcRequest;
 import com.kyyblabla.rpcframework.dto.RpcResponse;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import net.sf.cglib.reflect.FastClass;
+import net.sf.cglib.reflect.FastMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,13 +16,13 @@ import java.util.Map;
 /**
  * Created by kyy on 2017/3/3.
  */
-public class RpcHandler extends SimpleChannelInboundHandler<RpcRequest> {
+public class RpcServerHandler extends SimpleChannelInboundHandler<RpcRequest> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RpcHandler.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RpcServerHandler.class);
 
     private final Map<String, Object> handlerMap;
 
-    public RpcHandler(Map<String, Object> handlerMap) {
+    public RpcServerHandler(Map<String, Object> handlerMap) {
         this.handlerMap = handlerMap;
     }
 
@@ -47,12 +49,15 @@ public class RpcHandler extends SimpleChannelInboundHandler<RpcRequest> {
         Class<?>[] parameterTypes = request.getParameterTypes();
         Object[] parameters = request.getParameters();
 
-        Method method = serviceClass.getMethod(methodName, parameterTypes);
-        method.setAccessible(true);
-        return method.invoke(serviceBean, parameters);
-//        FastClass serviceFastClass = FastClass.create(serviceClass);
-//        FastMethod serviceFastMethod = serviceFastClass.getMethod(methodName, parameterTypes);
-//        return serviceFastMethod.invoke(serviceBean, parameters);
+        //java反射技术
+        //Method method = serviceClass.getMethod(methodName, parameterTypes);
+        //method.setAccessible(true);
+        //return method.invoke(serviceBean, parameters);
+
+        //cglib反射技术
+        FastClass serviceFastClass = FastClass.create(serviceClass);
+        FastMethod serviceFastMethod = serviceFastClass.getMethod(methodName, parameterTypes);
+        return serviceFastMethod.invoke(serviceBean, parameters);
     }
 
     @Override

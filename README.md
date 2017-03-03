@@ -7,4 +7,4 @@
 - Spring：boot 应用基本框架，本项目并未web项目，继承与 `CommandLineRunner` 作为启动函数
 - Netty：NIO处理网络请求
 - Protostuff：来至于Google的对象序列化框架
-- ZooKeeper：服务注册与发现
+_- ZooKeeper：服务注册与发现_

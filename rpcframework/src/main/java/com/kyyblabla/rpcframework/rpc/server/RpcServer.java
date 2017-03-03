@@ -1,8 +1,9 @@
-package com.kyyblabla.rpcframework.rpc;
+package com.kyyblabla.rpcframework.rpc.server;
 
 import com.kyyblabla.rpcframework.dto.RpcRequest;
 import com.kyyblabla.rpcframework.dto.RpcResponse;
 import com.kyyblabla.rpcframework.annotation.RpcService;
+import com.kyyblabla.rpcframework.rpc.registry.ServiceRegistry;
 import com.kyyblabla.rpcframework.util.RpcDecoder;
 import com.kyyblabla.rpcframework.util.RpcEncoder;
 import io.netty.bootstrap.ServerBootstrap;
@@ -68,7 +69,7 @@ public class RpcServer implements ApplicationContextAware, InitializingBean {
                             channel.pipeline()
                                     .addLast(new RpcDecoder(RpcRequest.class)) // 将 RPC 请求进行解码（为了处理请求）
                                     .addLast(new RpcEncoder(RpcResponse.class)) // 将 RPC 响应进行编码（为了返回响应）
-                                    .addLast(new RpcHandler(handlerMap)); // 处理 RPC 请求
+                                    .addLast(new RpcServerHandler(handlerMap)); // 处理 RPC 请求
                         }
                     })
                     .option(ChannelOption.SO_BACKLOG, 128)

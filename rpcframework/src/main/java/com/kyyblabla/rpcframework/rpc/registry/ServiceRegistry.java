@@ -1,5 +1,7 @@
-package com.kyyblabla.rpcframework.rpc;
+package com.kyyblabla.rpcframework.rpc.registry;
 
+import com.kyyblabla.rpcframework.config.Constant;
+import com.kyyblabla.rpcframework.rpc.server.RpcServer;
 import org.apache.zookeeper.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,12 +15,6 @@ public class ServiceRegistry {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RpcServer.class);
 
-
-    public static class Constant {
-        public static int ZK_SESSION_TIMEOUT = 5000;
-        public static String ZK_REGISTRY_PATH = "/registry";
-        public static String ZK_DATA_PATH = ZK_REGISTRY_PATH + "/data";
-    }
 
     private CountDownLatch latch = new CountDownLatch(1);
 
